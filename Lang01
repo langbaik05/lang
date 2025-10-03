@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cek Umur & Kartu - LANG BAIK</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #222;
+      animation: bergerak 3s linear infinite alternate;
+    }
+    @keyframes bergerak {
+      from { transform: translateX(-20px); color: red; }
+      to { transform: translateX(20px); color: blue; }
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      margin: 20px auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      max-width: 400px;
+    }
+    input {
+      padding: 10px;
+      width: 90%;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #aaa;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .result {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>LANG BAIK Bergerak 🚀</h1>
+
+  <div class="card">
+    <h2>Cek Umur</h2>
+    <input type="date" id="tglLahir">
+    <button onclick="cekUmur()">Hitung Umur</button>
+    <div id="umur" class="result"></div>
+  </div>
+
+  <div class="card">
+    <h2>Cek Jenis Kartu</h2>
+    <input type="text" id="nomor" placeholder="Masukkan Nomor HP...">
+    <button onclick="cekKartu()">Cek Kartu</button>
+    <div id="kartu" class="result"></div>
+  </div>
+
+  <script>
+    function cekUmur() {
+      const tglLahir = new Date(document.getElementById('tglLahir').value);
+      const sekarang = new Date();
+
+      if (!document.getElementById('tglLahir').value) {
+        document.getElementById('umur').innerText = "⚠️ Masukkan tanggal lahir dulu!";
+        return;
+      }
+
+      let tahun = sekarang.getFullYear() - tglLahir.getFullYear();
+      let bulan = sekarang.getMonth() - tglLahir.getMonth();
+      let hari = sekarang.getDate() - tglLahir.getDate();
+      let jam = sekarang.getHours();
+      let menit = sekarang.getMinutes();
+      let detik = sekarang.getSeconds();
+
+      if (hari < 0) {
+        bulan--;
+        hari += new Date(sekarang.getFullYear(), sekarang.getMonth(), 0).getDate();
+      }
+      if (bulan < 0) {
+        tahun--;
+        bulan += 12;
+      }
+
+      document.getElementById('umur').innerText = 
+        `Umur kamu: ${tahun} tahun, ${bulan} bulan, ${hari} hari, ${jam} jam, ${menit} menit, ${detik} detik ⏳`;
+    }
+
+    function cekKartu() {
+      let no = document.getElementById("nomor").value;
+      let provider = "Tidak diketahui";
+      if (/^08(11|12|13|14|15|16|17|18|19)/.test(no)) provider = "Telkomsel";
+      else if (/^08(21|22|23|27|28|29)/.test(no)) provider = "Indosat";
+      else if (/^08(52|53|56|57|58)/.test(no)) provider = "Telkomsel AS";
+      else if (/^08(81|82|83|84|85|86|87|88|89)/.test(no)) provider = "XL / Axis";
+      else if (/^08(95|96|97|98|99)/.test(no)) provider = "Tri";
+      else if (/^08(31|32|33|38)/.test
